@@ -1,5 +1,10 @@
-import { Contact } from "../../entities/contact"; 
-export interface ContactRepository { 
-    createContact(contact: Contact): Promise<boolean>;
-    getContacts(): Promise<Contact[]>; 
+// domain/interfaces/repositories/contact-repository.ts
+import { ContactRequestModel, ContactResponseModel } from "../../models/contact";
+
+export interface ContactRepository {
+    createContact(contact: ContactRequestModel): void;
+    deleteContact(id: String): void;
+    updateContact(id: String, data: ContactRequestModel): void;
+    getContacts(): Promise<ContactResponseModel[]>;
+    getContact(id: String): Promise<ContactResponseModel | null>;
 }
