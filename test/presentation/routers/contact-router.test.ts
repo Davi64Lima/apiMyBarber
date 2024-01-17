@@ -1,19 +1,19 @@
 import request from "supertest";
-import { Contact } from "../../../src/domain/entities/contact";
-import { CreateContactUseCase } from "../../../src/domain/interfaces/use-cases/contact/create-contact";
-import { GetAllContactsUseCase } from "../../../src/domain/interfaces/use-cases/contact/get-all-contact";
+import { CreateContactUseCase } from "../../../src/domain/interfaces/use-cases/contact/create-contact-use-case";
+import { GetAllContactsUseCase } from "../../../src/domain/interfaces/use-cases/contact/get-all-contacts-use-case";
+import { ContactRequestModel, ContactResponseModel } from "../../../src/domain/models/contact";
 import ContactRouter from '../../../src/presentation/routers/contact-router'
 import server from '../../../src/server'
 
 class MockGetAllContactsUseCase implements GetAllContactsUseCase {
-    execute(): Promise<Contact[]> {
-        throw new Error("Method not implemented.")
+    execute(): Promise<ContactResponseModel[]> {
+        throw new Error("Method not implemented.");
     }
 }
 
 class MockCreateContactUseCase implements CreateContactUseCase {
-    execute(contact: Contact): Promise<boolean> {
-        throw new Error("Method not implemented.")
+    execute(contact: ContactRequestModel): void {
+        throw new Error("Method not implemented.");
     }
 }
 
@@ -34,7 +34,7 @@ describe("Contact Router", () => {
     describe("GET /contact", () => {
 
         test("should return 200 with data", async () => {
-            const ExpectedData = [{ id: "1", surname: "Smith", firstName: "John", email: "john@gmail.com" }];
+            const ExpectedData = [{ id: "1", name: "Smith" }];
             jest.spyOn(mockGetAllContactsUseCase, "execute").mockImplementation(() => Promise.resolve(ExpectedData))
 
             const response = await request(server).get("/contact")

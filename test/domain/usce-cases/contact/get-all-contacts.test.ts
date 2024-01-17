@@ -1,14 +1,24 @@
-import { Contact } from "../../../../src/domain/entities/contact";
+//test/domain/use-cases/contact/get-all-contacts.test.ts
 import { ContactRepository } from "../../../../src/domain/interfaces/repositories/contact-repository";
+import { ContactRequestModel, ContactResponseModel } from "../../../../src/domain/models/contact";
 import { GetAllContacts } from '../../../../src/domain/use-cases/contact/get-all-contacts'
 
 describe("Get All Contacts Use Case", () => {
 
     class MockContactRepository implements ContactRepository {
-        createContact(contact: Contact): Promise<boolean> {
+        deleteContact(id: String): void {
             throw new Error("Method not implemented.");
         }
-        getContacts(): Promise<Contact[]> {
+        updateContact(id: String, data: ContactRequestModel): void {
+            throw new Error("Method not implemented.");
+        }
+        getContact(id: String): Promise<ContactResponseModel> {
+            throw new Error("Method not implemented.");
+        }
+        createContact(contact: ContactRequestModel): void {
+            throw new Error("Method not implemented.");
+        }
+        getContacts(): Promise<ContactResponseModel[]> {
             throw new Error("Method not implemented.");
         }
     }
@@ -20,7 +30,7 @@ describe("Get All Contacts Use Case", () => {
     })
 
     test("should return data", async () => {
-        const ExpectedResult = [{ id: "1", surname: "Smith", firstName: "John", email: "john@gmail.com" }]
+        const ExpectedResult = [{ id: "1", name: "Smith" }]
 
         jest.spyOn(mockContactRepository, "getContacts").mockImplementation(() => Promise.resolve(ExpectedResult))
         const getAllContactsUse = new GetAllContacts(mockContactRepository)
