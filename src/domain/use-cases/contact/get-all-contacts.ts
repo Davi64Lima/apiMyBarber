@@ -1,7 +1,7 @@
 // domain/use-cases/contact/-get-all-contacts.ts
 import { ContactResponseModel } from "../../models/contact";
 import { ContactRepository } from "../../interfaces/repositories/contact-repository";
-import { GetAllContactsUseCase } from "../../interfaces/use-cases/get-all-contacts-use-case";
+import { GetAllContactsUseCase } from "../../interfaces/use-cases/contact/get-all-contacts-use-case";
 
 export class GetAllContacts implements GetAllContactsUseCase {
     contactRepository: ContactRepository

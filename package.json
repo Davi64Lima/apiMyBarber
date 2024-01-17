@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --collectCoverage",
+    "dev:build": "tsc",
+    "dev:server": "nodemon -e js -w lib lib/main.js"
   },
   "keywords": [],
   "author": "",
