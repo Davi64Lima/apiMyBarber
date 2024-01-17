@@ -1,6 +1,6 @@
-import { Contact } from "../../entities/contact";
+import { ContactRequestModel } from "../../models/contact";
 import { ContactRepository } from "../../interfaces/repositories/contact-repository";
-import { CreateContactUseCase } from "../../interfaces/use-cases/contact/create-contact";
+import { CreateContactUseCase } from "../../interfaces/use-cases/create-contact-use-case";
 
 
 export class CreateContact implements CreateContactUseCase {
@@ -9,8 +9,8 @@ export class CreateContact implements CreateContactUseCase {
         this.contactRepository = contactRepository
     }
 
-    async execute(contact: Contact): Promise<boolean> {
-        const result = await this.contactRepository.createContact(contact)
-        return result
+    async execute(contact: ContactRequestModel) {
+        await this.contactRepository.createContact(contact)
+
     }
 }
